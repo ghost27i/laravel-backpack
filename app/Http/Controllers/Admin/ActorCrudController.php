@@ -41,6 +41,14 @@ class ActorCrudController extends CrudController
     {
         CRUD::setFromDb(); // columns
 
+
+        CRUD::setColumnDetails('movie_id', [
+            'label' => 'Movie',
+            'type' => 'select',
+            'entity' => 'movie',
+            'attribute' => 'title',
+        ]);  
+
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
@@ -58,7 +66,37 @@ class ActorCrudController extends CrudController
     {
         CRUD::setValidation(ActorRequest::class);
 
-        CRUD::setFromDb(); // fields
+        // CRUD::setFromDb(); // fields
+
+        CRUD::addFields([
+                [
+                    'label' => "Movie",
+                    'name' => 'movie_id',
+                    'attributes' => [
+                        'required' => true,
+                    ],
+                ],
+                [
+                    'name' => 'name',
+                    'attributes' => [
+                        'required' => true,
+                    ],
+                ],
+                [
+                    'name' => 'role',
+                    'attributes' => [
+                        'required' => true,
+                    ],
+                ],
+                [
+                    'name' => 'publish',
+                    'type' => 'boolean',
+                    'attributes' => [
+                        'required' => true,
+                    ],
+                ]
+
+        ]);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
